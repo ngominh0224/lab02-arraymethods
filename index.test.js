@@ -1,4 +1,4 @@
-const { maps, filters, findIndexes} = require('./index');
+const { maps, filters, findIndexes, reduces} = require('./index');
 
 describe('tests functions similar to array operations', () => {
   it('takes an array and capitalizes it', () => {
@@ -28,5 +28,15 @@ describe('tests functions similar to array operations', () => {
     const newArray = findIndexes(array, callback);
 
     expect(newArray).toEqual(2);
+  });
+
+  it('takes array and callback and returns accumulator', () => {
+    const array = [2, 4, 6, , 8];
+    const callback = (accumulator, item) => {
+      return accumulator + item;
+    };
+    const newArray = reduces(array, callback, 4);
+
+    expect(newArray).toEqual(24);
   });
 });
