@@ -1,4 +1,4 @@
-const { maps, filters, findIndexes, reduces} = require('./index');
+const { maps, filters, findIndexes, reduces, every} = require('./index');
 
 describe('tests functions similar to array operations', () => {
   it('takes an array and capitalizes it', () => {
@@ -38,5 +38,21 @@ describe('tests functions similar to array operations', () => {
     const newArray = reduces(array, callback, 4);
 
     expect(newArray).toEqual(24);
+  });
+
+  it('takes array and callback and returns true if all are true', () => {
+    const array = ['flower', 'rock', 'tree', 'cloud', 'field'];
+    const callback = (item) => item.startsWith('f');
+    const newArray = every(array, callback);
+
+    expect(newArray).toBeFalsy();
+  });
+
+  it('takes array of numbers and callback and returns true if all are true', () => {
+    const array = [1, 2, 3, 4, 4];
+    const callback = (item) => typeof item === 'number';
+    const newArray = every(array, callback);
+
+    expect(newArray).toBeTruthy();
   });
 });
