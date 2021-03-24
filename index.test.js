@@ -1,7 +1,4 @@
-const {
-  maps,
-  filters
-} = require('./index');
+const { maps, filters, findIndexes} = require('./index');
 
 describe('tests functions similar to array operations', () => {
   it('takes an array and capitalizes it', () => {
@@ -14,7 +11,7 @@ describe('tests functions similar to array operations', () => {
   });
 
   it('takes array and callback and returns first index thats true', () => {
-    const array = ['Ohio', 'Oregon', 'California', 'Washingtion', 'Idaho'];
+    const array = ['Ohio', 'Oregon', 'California', 'Washington', 'Idaho'];
     const callback = (item) => {
       if(item.startsWith('O')) return item;
     };
@@ -23,4 +20,13 @@ describe('tests functions similar to array operations', () => {
     expect(newArray).toEqual(['Ohio', 'Oregon']);
   });
 
+  it('takes array and callback and returns index of first true item', () => {
+    const array = ['Ohio', 'Oregon', 'California', 'Washington', 'Idaho'];
+    const callback = (item) => {
+      if (item.startsWith('C')) return item;
+    };
+    const newArray = findIndexes(array, callback);
+
+    expect(newArray).toEqual(2);
+  });
 });
